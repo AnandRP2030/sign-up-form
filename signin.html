@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in Page</title>
+
+    <style>
+      body {
+        padding: 100px 30%;
+        text-align: center;
+      }
+
+      body > div {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        width: 482px;
+        height: 404px;
+        padding-top: 50px;
+      }
+
+      .nav > a {
+        margin-right: 20px;
+        font-size: 25px;
+        color: red;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding-left: 50px;
+      }
+
+      form input,
+      form label {
+        width: 80%;
+        text-align: left;
+        height: 25px;
+        font-size: 20px;
+      }
+      form input {
+        margin-bottom: 20px;
+      }
+
+      input[type="submit"] {
+        width: 82%;
+        height: 40px;
+        text-align: center;
+      }
+    </style>F
+
+  </head>
+  <body>
+    <div>
+      <div class="nav">
+        <a href="./index.html">Signup</a>
+        <a href="./signin.html">Signin</a>
+      </div>
+
+      <div id="signin">
+        <h1 id="heading">Please Enter Your Details</h1>
+        <form>
+          <label for=""> Email </label>
+          <input type="email" id="email" />
+          <label for=""> Password </label>
+          <input type="password" id="password" />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var usersList = JSON.parse(localStorage.getItem("account-data"));
+
+    document.querySelector("form").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var userMail = document.getElementById("email").value;
+      var userPass = document.querySelector("#password").value;
+
+      if (isValid(userMail, userPass)) {
+        document.querySelector("#heading").innerHTML = "Sign in Successful";
+      } else {
+        document.querySelector("#heading").innerHTML = "Wrong Credentials";
+      }
+    });
+
+    function isValid(userMail, userPass) {
+      return usersList.some(function (item) {
+        return item.email == userMail && item.pass == userPass;
+      });
+    }
+  </script>
+</html>
